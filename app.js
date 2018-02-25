@@ -32,8 +32,17 @@ client.on("message", message => {
         });
     }
     catch(error) {
-        message.channel.send("I don't have that dicer in my database.")
+        message.channel.send("I don't have that dicer in my database.");
     }
+  }
+
+  if(command === "guide") {
+      const link = config.guidelink;
+      message.channel.send(link);
+  }
+
+  if(command === "help") {
+      message.channel.send("Try !guide or !dicer [Dicer Name]. For other feature requests message Ramen");
   }
 });
 
