@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
+const dicers = require("./dicers.json");
 
 client.once("ready", () => {
   console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
@@ -24,16 +25,9 @@ client.on("message", message => {
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
 
-  if(command === "dicer") {
-    const dicer = args[0]
-    try {
-        message.channel.send("", {
-            file: "./assets/" + dicer + ".png"
-        });
-    }
-    catch(error) {
-        message.channel.send("I don't have that dicer in my database.");
-    }
+  if (command === "dicer") {
+      const dicer = args[0].toLowerCase();
+      message.channel.send(dicers[dicer]);
   }
 
   if(command === "guide") {
@@ -42,7 +36,10 @@ client.on("message", message => {
   }
 
   if(command === "help") {
-      message.channel.send("Try !guide or !dicer [Dicer Name]. For other feature requests message Ramen");
+      message.channel.send("List of available commands \n \n \
+      !guide : link to guild-created wiki \n \
+      !dicer [Dicer Name] : view a dicer's stats and skills \n \n \
+      For other feature requests message Ramen");
   }
 });
 
